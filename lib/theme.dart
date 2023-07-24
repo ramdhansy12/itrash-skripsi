@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+double defaultMargin = 30.0;
+
+Color backgroundColor = const Color.fromARGB(255, 108, 146, 102);
+Color backgroundColor2 = const Color(0xffF0EFEF);
+Color backgroundColor3 = const Color(0xff61686C);
+Color backgroundColor4 = const Color.fromARGB(255, 32, 44, 30);
+Color primaryColor = const Color.fromARGB(255, 167, 167, 168);
+Color primaryColorWhite = const Color(0xffFFFFFF);
+Color secondaryColor = const Color(0xff38ABBE);
+Color alertColor = const Color(0xffED6363);
+Color priceColor = const Color(0xff2C96F1);
+Color priceColor2 = const Color(0xff03D2EE);
+Color primaryTextColor = const Color(0xff2E2E2E);
+Color secondaryTextColor = const Color(0xff999999);
+Color bgButton = const Color(0xffEEEAEA);
+Color blackColor = const Color(0xff2E2E2E);
+Color starColor = const Color(0xffF3CE09);
+Color transaparentColor = Colors.transparent;
+Color bgButton2 = const Color.fromARGB(255, 80, 254, 68);
+Color subtitleColor = const Color.fromARGB(255, 154, 154, 154);
+
+TextStyle primaryTextStyle = GoogleFonts.poppins(color: primaryTextColor);
+TextStyle primaryTextStyle2 = GoogleFonts.poppins(color: blackColor);
+TextStyle primaryTextStyleWht = GoogleFonts.poppins(color: primaryColorWhite);
+TextStyle secondaryTextSTyle = GoogleFonts.poppins(color: secondaryTextColor);
+TextStyle priceTextStyle = GoogleFonts.poppins(color: priceColor);
+TextStyle priceTextStyle2 = GoogleFonts.poppins(color: priceColor2);
+TextStyle alertTextStyle2 = GoogleFonts.poppins(color: alertColor);
+TextStyle subTextStyle = GoogleFonts.poppins(color: primaryColorWhite);
+TextStyle blackTextStyle = GoogleFonts.poppins(color: blackColor);
+TextStyle subtitleTextStyle = GoogleFonts.poppins(color: bgButton);
+TextStyle subtitleTextStyle2 = GoogleFonts.poppins(color: blackColor);
+TextStyle subtitleTextStyle3 = GoogleFonts.poppins(color: subtitleColor);
+FontWeight light = FontWeight.w300;
+FontWeight reguler = FontWeight.w400;
+FontWeight medium = FontWeight.w500;
+FontWeight semiBold = FontWeight.w600;
+FontWeight bold = FontWeight.w700;
