@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^4.0.3
   provider: ^6.0.0
   flutter_launcher_icons: ^0.10.0
+  http: ^1.0.0
 
 dev_dependencies:
   flutter_test:
