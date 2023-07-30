@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:itrash_skripsi/model/model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthServices {
-  String baseUrl = 'http://127.0.0.1:8000/api';
+  String baseUrl = 'http://192.168.56.56/api';
 
   Future<User> login({
     String? email,
@@ -17,8 +18,8 @@ class AuthServices {
 
     var response =
         await http.post(Uri.parse(url), headers: headers, body: body);
-    print(response);
 
+    // print(response.statusCode);
     if (response.statusCode == 200) {
       var dataResponse = jsonDecode(response.body);
 

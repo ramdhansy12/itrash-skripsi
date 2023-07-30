@@ -28,7 +28,8 @@ class _SignInPageState extends State<SignInPage> {
         email: emailController.text,
         password: passwordController.text,
       )) {
-        // Navigator.pushNamed(context, '/home');
+        // ignore: use_build_context_synchronously
+        Navigator.pushNamed(context, '/home');
       } else {
         setState(() {
           isLoading = false;
@@ -170,7 +171,7 @@ class _SignInPageState extends State<SignInPage> {
                     Expanded(
                       child: TextFormField(
                         controller: passwordController,
-                        obscureText: false,
+                        obscureText: true,
                         decoration: const InputDecoration.collapsed(
                           hintText: 'Password Kamu',
                           hintStyle: TextStyle(color: Colors.black38),
