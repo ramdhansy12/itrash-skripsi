@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:itrash_skripsi/model/model.dart';
+import 'package:itrash_skripsi/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../theme.dart';
 
@@ -7,6 +10,12 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    User user = authProvider.user!;
+
+    String? userName = user.name!;
+    String? email = user.email!;
+
     Widget header() {
       return AppBar(
         backgroundColor: backgroundColor,
@@ -33,7 +42,7 @@ class ProfilePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Halo User',
+                      'Halo ${user.name}',
                       style: primaryTextStyleWht.copyWith(
                         fontSize: 24,
                         fontWeight: semiBold,
@@ -100,13 +109,25 @@ class ProfilePage extends StatelessWidget {
                   fontWeight: semiBold,
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, '/edit-profile');
-                },
-                child: menuItem(
-                  'Edit Profile',
-                ),
+              const SizedBox(
+                height: 15,
+              ),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Text('Nama: ${userName}'),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text('Email: ${email}'),
+                    ],
+                  )
+                ],
               ),
               const SizedBox(
                 height: 30,

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:itrash_skripsi/model/model.dart';
 import 'package:itrash_skripsi/theme.dart';
+import 'package:provider/provider.dart';
+// ignore: unused_import
+import 'package:itrash_skripsi/providers/auth_provider.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    // ignore: unused_local_variable
+    User? user;
+    // user = authProvider.user;
     AppBar header() {
       return AppBar(
         leading: IconButton(
