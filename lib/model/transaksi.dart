@@ -3,7 +3,7 @@ part of 'model.dart';
 class TransaksiModel {
   int? id;
   String? noTransaksi;
-  DateTime? tanggalTransaksi;
+  String? tanggalTransaksi;
   String? status;
   double? total;
 
@@ -20,6 +20,6 @@ class TransaksiModel {
     noTransaksi = json['no_transaksi'];
     tanggalTransaksi = json['tanggal_transaksi'];
     status = json['status'];
-    total = json['total'];
+    total = json['total'].toDouble();
   }
 }

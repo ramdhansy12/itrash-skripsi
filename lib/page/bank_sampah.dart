@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:itrash_skripsi/page/pembayaran.dart';
+import 'package:itrash_skripsi/page/transaksi_sampahform.dart';
 import 'package:itrash_skripsi/theme.dart';
+import 'package:itrash_skripsi/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class BankSampahPage extends StatelessWidget {
   const BankSampahPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    String? token = authProvider.user?.token;
+
     AppBar header() {
       return AppBar(
         backgroundColor: backgroundColor,
         elevation: 0,
         centerTitle: true,
-        title: Center(
+        title: const Center(
           child: Text('Lakukan Transaksi Sampah Yuk!'),
         ),
       );
@@ -58,7 +65,16 @@ class BankSampahPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/transaksi-sampah');
+                        if (token != null && token.isNotEmpty) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      TransaksiSampahForm(token)));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(token.toString())));
+                        }
                       },
                       child: Image.asset(
                         'asset/image_trssampah.png',
@@ -98,7 +114,10 @@ class BankSampahPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.popAndPushNamed(context, '/log-sampah');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Pembayaran(token!)));
                       },
                       child: Image.asset(
                         'asset/image_tbgsampah.png',
