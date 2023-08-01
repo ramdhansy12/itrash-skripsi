@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:itrash_skripsi/theme.dart';
 
 class TransaksiSampahForm extends StatefulWidget {
-  const TransaksiSampahForm({super.key});
+  final String token;
+  const TransaksiSampahForm(
+    this.token, {
+    super.key,
+  });
 
   @override
   _TransaksiSampahFormState createState() => _TransaksiSampahFormState();

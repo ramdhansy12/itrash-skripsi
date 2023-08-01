@@ -1,49 +1,30 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: TransaksiSampah(),
-    );
-  }
-}
-
 class TransaksiSampah extends StatefulWidget {
-  const TransaksiSampah({super.key});
+  final String token;
+
+  const TransaksiSampah(this.token, {super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _TransaksiSampahState createState() => _TransaksiSampahState();
 }
 
 class _TransaksiSampahState extends State<TransaksiSampah> {
-  final List<Transaksi> _listTransaksi = [
-    Transaksi(nama: 'Ramdhan Syaifulloh', jenisSampah: 'Plastik', berat: 3.5),
-    Transaksi(nama: 'Ramdhan Syaifulloh', jenisSampah: 'Kertas', berat: 2.0),
-    Transaksi(nama: 'Ramdhan Syaifulloh', jenisSampah: 'Kaca', berat: 1.2),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transaksi Sampah'),
+        title: const Text('Transaksi Sampah'),
       ),
       body: ListView.builder(
-        itemCount: _listTransaksi.length,
+        itemCount: 0,
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
               leading: Icon(Icons.person),
-              title: Text(_listTransaksi[index].nama),
-              subtitle: Text(
-                  'Jenis Sampah: ${_listTransaksi[index].jenisSampah}\nBerat: ${_listTransaksi[index].berat} kg'),
+              title: Text('contoh'),
+              subtitle: Text('Jenis Sampah: '),
             ),
           );
         },
@@ -56,20 +37,11 @@ class _TransaksiSampahState extends State<TransaksiSampah> {
           onTap: () {
             Navigator.pushNamed(context, '/form-transaksi');
           },
-          child: Icon(
+          child: const Icon(
             Icons.add,
           ),
         ),
       ),
     );
   }
-}
-
-class Transaksi {
-  String nama;
-  String jenisSampah;
-  double berat;
-
-  Transaksi(
-      {required this.nama, required this.jenisSampah, required this.berat});
 }

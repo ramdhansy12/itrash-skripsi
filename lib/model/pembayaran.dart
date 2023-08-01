@@ -4,14 +4,23 @@ class PembayaranModel {
   int? id;
   String? keterangan;
   double? total;
-  TransaksiModel? transaksiModel;
+  String? noTransaksi;
 
-  PembayaranModel({this.id, this.keterangan, this.total, this.transaksiModel});
+  PembayaranModel({this.id, this.keterangan, this.total, this.noTransaksi});
 
   PembayaranModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     keterangan = json['keterangan'];
-    total = json['total'];
-    transaksiModel = TransaksiModel.fromJson(json['pembayaran_transaksi']);
+    total = double.parse(json['total'].toString());
+    noTransaksi = json['no_transaksi'];
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'keterangan': keterangan,
+      'total': total,
+      'noTransaksi': noTransaksi,
+    };
   }
 }
