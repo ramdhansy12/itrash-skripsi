@@ -5,7 +5,7 @@ class TransaksiModel {
   String? noTransaksi;
   String? tanggalTransaksi;
   String? status;
-  double? total;
+  int? total;
 
   TransaksiModel({
     this.id,
@@ -16,10 +16,11 @@ class TransaksiModel {
   });
 
   TransaksiModel.fromJson(Map<String, dynamic> json) {
+    // print('from json: $json');
     id = json['id'];
     noTransaksi = json['no_transaksi'];
     tanggalTransaksi = json['tanggal_transaksi'];
     status = json['status'];
-    total = json['total'].toDouble();
+    total = json['total'];
   }
 }

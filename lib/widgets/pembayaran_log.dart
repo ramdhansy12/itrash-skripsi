@@ -12,7 +12,7 @@ class PembayaranLog extends StatelessWidget {
     String? keterangan = pembayanModels.keterangan.toString();
     String? total = pembayanModels.total.toString();
     String? noTransaksi = pembayanModels.noTransaksi.toString();
-    print(pembayanModels);
+
     return Container(
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.only(

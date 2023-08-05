@@ -19,8 +19,8 @@ class NewsCard2 extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            'https://img.antaranews.com/cache/800x533/2023/07/20/IMG-20230720-WA0017.jpg.webp',
+          Image.asset(
+            'asset/news2.jpg.webp',
             width: 200,
             height: 140,
             fit: BoxFit.fill,
@@ -33,7 +33,7 @@ class NewsCard2 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 2,
+                  height: 15,
                 ),
                 Text(
                   'Warga Keluhkan Tumpukan Sampah di Jalan Inspeksi',

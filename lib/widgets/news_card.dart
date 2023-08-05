@@ -19,8 +19,8 @@ class NewsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            'https://img.antaranews.com/cache/800x533/2023/07/21/IMG_20230721_221150.jpg.webp',
+          Image.asset(
+            'asset/news1.jpg.webp',
             width: 200,
             height: 140,
             fit: BoxFit.fill,
@@ -33,7 +33,7 @@ class NewsCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 2,
+                  height: 15,
                 ),
                 Text(
                   'Pemda DIY Meminta Kabupaten Kota Kelola Sampah Secara Mandiri',

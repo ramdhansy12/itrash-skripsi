@@ -8,8 +8,9 @@ import 'package:itrash_skripsi/page/term_ofservice_page.dart';
 // import 'package:itrash_skripsi/page/transaksi_page.dart';
 // import 'package:itrash_skripsi/page/transaksi_sampahform.dart';
 import 'package:itrash_skripsi/providers/pembayaran_provider.dart';
+import 'package:itrash_skripsi/providers/transaksi_provider.dart';
 import 'package:itrash_skripsi/widgets/berita_card.dart';
-import 'package:itrash_skripsi/widgets/logsampah_card.dart';
+// import 'package:itrash_skripsi/widgets/logsampah_card.dart';
 import 'package:itrash_skripsi/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => PembayaranProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => TransaksiProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -43,7 +47,7 @@ class MyApp extends StatelessWidget {
           // '/transaksi-sampah': (context) => const TransaksiSampah(),
           // '/form-transaksi': (context) => const TransaksiSampahForm(),
           // ignore: prefer_const_constructors
-          '/log-sampah': (context) => SampahLog(),
+          // '/log-sampah': (context) => SampahLog(),
           // ignore: prefer_const_constructors
           '/berita': (context) => BeritaCard(),
         },
