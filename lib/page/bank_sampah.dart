@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:itrash_skripsi/page/pembayaran.dart';
+import 'package:itrash_skripsi/page/transaksi.dart';
 import 'package:itrash_skripsi/page/transaksi_sampahform.dart';
 import 'package:itrash_skripsi/theme.dart';
 import 'package:itrash_skripsi/providers/auth_provider.dart';
@@ -44,7 +45,7 @@ class BankSampahPage extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 5,
             ),
             Container(
               width: 170,
@@ -85,6 +86,7 @@ class BankSampahPage extends StatelessWidget {
                       style: primaryTextStyle.copyWith(
                         fontSize: 12,
                         fontWeight: semiBold,
+                        color: Colors.white,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -124,17 +126,65 @@ class BankSampahPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Riwayat Transaksi Sampah',
+                      'Riwayat Pembayaran Sampah',
                       style: primaryTextStyle.copyWith(
                         fontSize: 10,
                         fontWeight: semiBold,
+                        color: Colors.white,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
               ),
-            )
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: 170,
+              height: 210,
+              margin: EdgeInsets.symmetric(
+                horizontal: defaultMargin,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: backgroundColor,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Transaksi(token!)));
+                      },
+                      child: Image.asset(
+                        'asset/image_trssampah.png',
+                      ),
+                    ),
+                    Text(
+                      'Riwayat Transaksi Sampah',
+                      style: primaryTextStyle.copyWith(
+                        fontSize: 10,
+                        fontWeight: semiBold,
+                        color: Colors.white,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       );

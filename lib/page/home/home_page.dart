@@ -26,9 +26,9 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Halo User',
+                    'Selamat Datang di Bank Sampah',
                     style: primaryTextStyle2.copyWith(
-                      fontSize: 24,
+                      fontSize: 20,
                       fontWeight: semiBold,
                     ),
                   ),
@@ -64,8 +64,8 @@ class HomePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(10), color: Colors.black38),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.network(
-            'https://images.unsplash.com/photo-1577814576071-04b438d9ff2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+          child: Image.asset(
+            'asset/home_page_banner.jpg',
             fit: BoxFit.cover,
           ),
         ),
@@ -241,7 +241,7 @@ class HomePage extends StatelessWidget {
     Widget headingTitle4() {
       return Container(
         margin: EdgeInsets.only(
-          top: 40,
+          top: 20,
           left: 25,
           right: defaultMargin,
         ),
@@ -255,7 +255,7 @@ class HomePage extends StatelessWidget {
     Widget headingTitle3() {
       return Container(
         margin: EdgeInsets.only(
-          top: 10,
+          top: 20,
           left: 35,
           right: defaultMargin,
         ),

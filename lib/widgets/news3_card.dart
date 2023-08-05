@@ -19,8 +19,8 @@ class NewsCard3 extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            'https://img.antaranews.com/cache/800x533/2023/07/06/DF2E2652-83D4-4E31-92D4-D6464BE42DCC.jpeg.webp',
+          Image.asset(
+            'asset/news3.jpeg.webp',
             width: 200,
             height: 140,
             fit: BoxFit.fill,
@@ -33,7 +33,7 @@ class NewsCard3 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 2,
+                  height: 15,
                 ),
                 Text(
                   'Indonesia dan Korea Kembangkan Teknologi Pengembangan Sampah',
