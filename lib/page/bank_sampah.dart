@@ -78,7 +78,7 @@ class BankSampahPage extends StatelessWidget {
                         }
                       },
                       child: Image.asset(
-                        'asset/image_trssampah.png',
+                        'asset/il_transaksi.png',
                       ),
                     ),
                     Text(
