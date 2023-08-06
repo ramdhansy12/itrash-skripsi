@@ -19,8 +19,8 @@ class NewsCard3 extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            'asset/news3.jpeg.webp',
+          Image.network(
+            'https://img.antaranews.com/cache/800x533/2023/07/06/DF2E2652-83D4-4E31-92D4-D6464BE42DCC.jpeg.webp',
             width: 200,
             height: 140,
             fit: BoxFit.fill,
@@ -33,7 +33,7 @@ class NewsCard3 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
                 Text(
                   'Indonesia dan Korea Kembangkan Teknologi Pengembangan Sampah',
@@ -43,13 +43,16 @@ class NewsCard3 extends StatelessWidget {
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(
+                  height: 5,
+                ),
                 TextButton(
                   style: TextButton.styleFrom(
-                      textStyle:
-                          const TextStyle(fontSize: 10, color: Colors.black54)),
+                    textStyle:
+                        const TextStyle(fontSize: 10, color: Colors.black54),
+                  ),
                   onPressed: () {
-                    Uri.https(
-                        'https://www.merdeka.com/jatim/alasan-pentingnya-menjaga-kebersihan-lingkungan-bantu-lindungi-kesehatan-kln.html');
+                    Navigator.pushNamed(context, '/berita');
                   },
                   child: const Text(
                     'Baca Selengkpanya....',
