@@ -33,7 +33,7 @@ class _TransaksiState extends State<Transaksi> {
   Widget build(BuildContext context) {
     List<TransaksiModel> transaksiLogData =
         Provider.of<TransaksiProvider>(context).transaksis.toList();
-    print(transaksiLogData.length);
+    // print(transaksiLogData.length);
     // ignore: prefer_is_empty
     if (transaksiLogData.isEmpty && transaksiLogData.length == 0) {
       return Scaffold(

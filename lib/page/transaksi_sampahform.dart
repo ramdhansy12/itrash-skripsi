@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:itrash_skripsi/model/model.dart';
+import 'package:itrash_skripsi/providers/jenis_sampah_provider.dart';
 import 'package:itrash_skripsi/theme.dart';
+import 'package:provider/provider.dart';
 
 class TransaksiSampahForm extends StatefulWidget {
   final String token;
@@ -14,16 +17,41 @@ class TransaksiSampahForm extends StatefulWidget {
 
 class _TransaksiSampahFormState extends State<TransaksiSampahForm> {
   final _formKey = GlobalKey<FormState>();
-  String _nama = '';
-  String _jenisSampah = '';
-  double _berat = 0.0;
+
+  bool isLoading = false;
+
+  String? dropdownvalue;
+  TextEditingController beratController = TextEditingController(text: '');
+
+  @override
+  void initState() {
+    getInit();
+    super.initState();
+  }
+
+  getInit() {
+    Provider.of<JenisSampahProvider>(context, listen: false).getSampah();
+
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<JenisSampah> jenisSampahData =
+        Provider.of<JenisSampahProvider>(context).jenisSampahs.toList();
+    //submit form logic
+    handleSubmitTransaction() async {
+      setState(() {
+        isLoading = true;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
-        title: Center(
+        title: const Center(
           child: Text('Form Transaksi Sampah'),
         ),
       ),
@@ -34,49 +62,44 @@ class _TransaksiSampahFormState extends State<TransaksiSampahForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Nama'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Nama tidak boleh kosong';
-                  }
-                  return null;
+              const Text("Pilih Jenis Sampah"),
+              DropdownButton(
+                isExpanded: true,
+                hint: const Text("Pilih jenis sampah"),
+                items: jenisSampahData.map((e) {
+                  return DropdownMenuItem(
+                    value: e.id.toString(),
+                    child: Text(e.namaSampah.toString()),
+                  );
+                }).toList(),
+                onChanged: (String? newVal) {
+                  setState(() {
+                    dropdownvalue = newVal!;
+                  });
                 },
-                onSaved: (value) {
-                  _nama = value!;
-                },
+                value: dropdownvalue,
               ),
+              Text(dropdownvalue!),
               const SizedBox(height: 16),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Jenis Sampah'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Jenis sampah tidak boleh kosong';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _jenisSampah = value!;
-                },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                decoration: InputDecoration(labelText: 'Berat (kg)'),
+                controller: beratController,
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                decoration: const InputDecoration(labelText: 'Berat (kg)'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Berat tidak boleh kosong';
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  _berat = double.parse(value!);
-                },
               ),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  _submitForm();
+                  if (_formKey.currentState!.validate()) {
+                    handleSubmitTransaction();
+                    // _formKey.currentState!.save();
+                  }
                 },
                 child: const Text('Simpan'),
               ),
@@ -87,16 +110,9 @@ class _TransaksiSampahFormState extends State<TransaksiSampahForm> {
     );
   }
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
+  // void _submitForm() {
 
-      // Simpan data transaksi ke dalam database atau lakukan tindakan lain sesuai dengan kebutuhan
-
-      // Cetak data sebagai contoh
-      // print('Nama: $_nama');
-      // print('Jenis Sampah: $_jenisSampah');
-      // print('Berat: $_berat kg');
-    }
-  }
+  //     // Simpan data transaksi ke dalam database atau lakukan tindakan lain sesuai dengan kebutuhan
+  //   }
+  // }
 }
