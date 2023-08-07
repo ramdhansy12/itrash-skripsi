@@ -4,7 +4,7 @@ import 'package:itrash_skripsi/model/model.dart';
 import 'package:http/http.dart' as http;
 
 class TransaksiService {
-  String baseUrl = 'https://itrash.technosolution.site/api';
+  String baseUrl = 'http://192.168.56.56/api';
 
   Future<List<TransaksiModel>> getTransaksi(String token) async {
     var url = '$baseUrl/transaksi';
@@ -20,10 +20,8 @@ class TransaksiService {
       List<TransaksiModel> transaksi = [];
 
       for (var item in listTransaksi) {
-        // print(item);
         transaksi.add(TransaksiModel.fromJson(item));
       }
-
       return transaksi;
     } else {
       throw Exception("gagal ambil data");

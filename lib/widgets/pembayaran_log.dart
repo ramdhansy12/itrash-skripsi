@@ -60,6 +60,9 @@ class PembayaranLog extends StatelessWidget {
                   )
                 ],
               ),
+              const SizedBox(
+                height: 15,
+              ),
             ],
           ),
         ],

@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:itrash_skripsi/model/model.dart';
 import 'package:itrash_skripsi/providers/jenis_sampah_provider.dart';
+import 'package:itrash_skripsi/providers/transaksi_provider.dart';
 import 'package:itrash_skripsi/theme.dart';
 import 'package:provider/provider.dart';
 
 class TransaksiSampahForm extends StatefulWidget {
-  final String token;
-  const TransaksiSampahForm(
-    this.token, {
-    super.key,
-  });
+  final User user;
 
+  const TransaksiSampahForm(this.user, {super.key});
   @override
-  _TransaksiSampahFormState createState() => _TransaksiSampahFormState();
+  State<TransaksiSampahForm> createState() => _TransaksiSampahFormState();
 }
 
 class _TransaksiSampahFormState extends State<TransaksiSampahForm> {
   final _formKey = GlobalKey<FormState>();
 
   bool isLoading = false;
-
   String? dropdownvalue;
-  TextEditingController beratController = TextEditingController(text: '');
+  TextEditingController beratController = TextEditingController();
 
   @override
   void initState() {
@@ -41,10 +38,57 @@ class _TransaksiSampahFormState extends State<TransaksiSampahForm> {
   Widget build(BuildContext context) {
     List<JenisSampah> jenisSampahData =
         Provider.of<JenisSampahProvider>(context).jenisSampahs.toList();
+
+    TransaksiProvider transaksiProvider =
+        Provider.of<TransaksiProvider>(context);
     //submit form logic
     handleSubmitTransaction() async {
       setState(() {
         isLoading = true;
+      });
+
+      var beratController2 = beratController.text.toString();
+      int berat = int.parse(beratController2);
+
+      var idSampahs = dropdownvalue;
+      int idSampah = int.parse(idSampahs.toString());
+
+      var token = widget.user.token;
+
+      await transaksiProvider.submitTransaksi(token!, idSampah, berat);
+
+      // await transaksiProvider
+      //     .submitTransaksi(token!, idSampah, berat)
+      //     .then((value) {
+      //   if () {
+
+      AlertDialog alert = AlertDialog(
+        title: const Text("Transaksi Sampah Berhasil!"),
+        content: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: const Text("Berhasil, silahkan cek transaksi anda"),
+        ),
+        actions: [
+          TextButton(
+            style: TextButton.styleFrom(backgroundColor: primaryColor),
+            child: Text(
+              'Ok',
+              style: primaryTextStyleWht,
+            ),
+            onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                context, '/home', (route) => false),
+          ),
+        ],
+      );
+      //   } else {
+      //     throw Exception("gagal submit transaksi");
+      //   }
+      showDialog(context: context, builder: (context) => alert);
+      setState(() {
+        isLoading = false;
       });
     }
 
@@ -79,7 +123,6 @@ class _TransaksiSampahFormState extends State<TransaksiSampahForm> {
                 },
                 value: dropdownvalue,
               ),
-              Text(dropdownvalue!),
               const SizedBox(height: 16),
               TextFormField(
                 controller: beratController,

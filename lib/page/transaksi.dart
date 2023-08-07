@@ -35,10 +35,11 @@ class _TransaksiState extends State<Transaksi> {
         Provider.of<TransaksiProvider>(context).transaksis.toList();
     // print(transaksiLogData.length);
     // ignore: prefer_is_empty
+    // print(transaksiLogData);
     if (transaksiLogData.isEmpty && transaksiLogData.length == 0) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('History Transaksi'),
+          title: const Text('History Transaksi Kosong'),
         ),
         body: ListView.builder(
           itemCount: 0,
