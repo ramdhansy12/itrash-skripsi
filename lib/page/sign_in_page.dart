@@ -28,7 +28,6 @@ class _SignInPageState extends State<SignInPage> {
         email: emailController.text,
         password: passwordController.text,
       )) {
-        // ignore: use_build_context_synchronously
         Navigator.pushNamed(context, '/home');
       } else {
         setState(() {

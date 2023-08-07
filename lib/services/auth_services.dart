@@ -25,6 +25,7 @@ class AuthServices {
 
       User user = User.fromJson(dataResponse['user']);
 
+      // ignore: prefer_interpolation_to_compose_strings
       user.token = 'Bearer ' + dataResponse['access_token'];
 
       return user;

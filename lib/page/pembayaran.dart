@@ -37,7 +37,7 @@ class _PembayaranState extends State<Pembayaran> {
     if (pembayaranData.isEmpty && pembayaranData.length == 0) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Log Transaksi Sampah'),
+          title: const Text('Log Transaksi Sampah Kosong'),
         ),
         body: ListView.builder(
           itemCount: 0,
@@ -79,7 +79,7 @@ class _PembayaranState extends State<Pembayaran> {
           Column(
             children: [
               Container(
-                height: 90,
+                width: double.infinity,
                 margin: const EdgeInsets.only(bottom: 7, top: 3),
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 color: backgroundColor,

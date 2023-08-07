@@ -5,6 +5,7 @@ import 'package:itrash_skripsi/page/sign_in_page.dart';
 import 'package:itrash_skripsi/page/sign_up_page.dart';
 import 'package:itrash_skripsi/page/splash_page.dart';
 import 'package:itrash_skripsi/page/term_ofservice_page.dart';
+import 'package:itrash_skripsi/providers/jenis_sampah_provider.dart';
 // import 'package:itrash_skripsi/page/transaksi_page.dart';
 // import 'package:itrash_skripsi/page/transaksi_sampahform.dart';
 import 'package:itrash_skripsi/providers/pembayaran_provider.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => TransaksiProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => JenisSampahProvider(),
         ),
       ],
       child: MaterialApp(
