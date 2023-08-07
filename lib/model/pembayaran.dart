@@ -12,7 +12,7 @@ class PembayaranModel {
     id = json['id'];
     keterangan = json['keterangan'];
     total = double.parse(json['total'].toString());
-    noTransaksi = json['no_transaksi'];
+    noTransaksi = json['pembayaran_transaksi']['no_transaksi'];
   }
 
   Map<String, dynamic> toJson() {

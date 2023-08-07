@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itrash_skripsi/model/model.dart';
 import 'package:itrash_skripsi/page/pembayaran.dart';
 import 'package:itrash_skripsi/page/transaksi.dart';
 import 'package:itrash_skripsi/page/transaksi_sampahform.dart';
@@ -12,7 +13,10 @@ class BankSampahPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    String? token = authProvider.user?.token;
+    User user = authProvider.user!;
+    String? token = user.token;
+
+    // print(user);
 
     AppBar header() {
       return AppBar(
@@ -66,15 +70,16 @@ class BankSampahPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        if (token != null && token.isNotEmpty) {
+                        // ignore: unnecessary_null_comparison
+                        if (user == null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(user.toString())));
+                        } else {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      TransaksiSampahForm(token)));
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(token.toString())));
+                                      TransaksiSampahForm(user)));
                         }
                       },
                       child: Image.asset(

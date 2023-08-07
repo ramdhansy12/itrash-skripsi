@@ -22,5 +22,6 @@ class TransaksiModel {
     tanggalTransaksi = json['tanggal_transaksi'];
     status = json['status'];
     total = int.parse(json['total'].toString());
+    // print(total);
   }
 }

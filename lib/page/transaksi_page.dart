@@ -20,7 +20,7 @@ class _TransaksiSampahState extends State<TransaksiSampah> {
       body: ListView.builder(
         itemCount: 0,
         itemBuilder: (context, index) {
-          return Card(
+          return const Card(
             child: ListTile(
               leading: Icon(Icons.person),
               title: Text('contoh'),

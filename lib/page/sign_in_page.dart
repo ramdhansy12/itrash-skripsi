@@ -28,8 +28,6 @@ class _SignInPageState extends State<SignInPage> {
         email: emailController.text,
         password: passwordController.text,
       )) {
-        print(authProvider);
-
         Navigator.pushNamed(context, '/home');
       } else {
         setState(() {
