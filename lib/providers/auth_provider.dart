@@ -11,6 +11,28 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<bool> register({
+    required String name,
+    required String email,
+    required String phone,
+    required String password,
+  }) async {
+    try {
+      User user = await AuthServices().register(
+        name: name,
+        email: email,
+        phone: phone,
+        password: password,
+      );
+      _user = user;
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+// Login auth provider
   Future<bool> login({
     required String email,
     required String password,

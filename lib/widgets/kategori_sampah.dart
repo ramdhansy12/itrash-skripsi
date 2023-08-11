@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:itrash_skripsi/theme.dart';
 
-class KategoriSampah extends StatelessWidget {
-  const KategoriSampah({super.key});
+class KategoriSampah1 extends StatelessWidget {
+  const KategoriSampah1({super.key});
 
   @override
   Widget build(BuildContext context) {

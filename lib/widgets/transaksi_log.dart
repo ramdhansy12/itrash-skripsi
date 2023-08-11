@@ -68,7 +68,7 @@ class TransaksiLog extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Tanggal: $statusTr',
+                    'Status: $statusTr',
                     style: const TextStyle(
                       color: Colors.white,
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itrash_skripsi/model/model.dart';
 import 'package:itrash_skripsi/theme.dart';
 import 'package:itrash_skripsi/widgets/kategori2_sampah.dart';
 import 'package:itrash_skripsi/widgets/kategori3_sampah.dart';
@@ -6,12 +7,20 @@ import 'package:itrash_skripsi/widgets/kategori_sampah.dart';
 import 'package:itrash_skripsi/widgets/news2_card.dart';
 import 'package:itrash_skripsi/widgets/news3_card.dart';
 import 'package:itrash_skripsi/widgets/news_card.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/auth_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    User user = authProvider.user!;
+
+    String? userName = user.name!;
+
     Widget header() {
       return Container(
         margin: EdgeInsets.only(
@@ -26,7 +35,7 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Selamat Datang di Bank Sampah',
+                    'Halo ${user.name}',
                     style: primaryTextStyle2.copyWith(
                       fontSize: 20,
                       fontWeight: semiBold,
@@ -35,21 +44,21 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/edit-profile');
-              },
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('asset/image_profile.png'),
-                  ),
-                ),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.pushNamed(context, '/edit-profile');
+            //   },
+            //   child: Container(
+            //     width: 40,
+            //     height: 40,
+            //     decoration: const BoxDecoration(
+            //       shape: BoxShape.circle,
+            //       image: DecorationImage(
+            //         image: AssetImage('asset/image_profile.png'),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       );
@@ -279,7 +288,7 @@ class HomePage extends StatelessWidget {
         ),
         child: const Column(
           children: [
-            KategoriSampah(),
+            KategoriSampah1(),
             KategoriSampah2(),
             KategoriSampah3(),
           ],
