@@ -1,36 +1,38 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:itrash_skripsi/model/model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthServices {
-  String baseUrl = 'https://itrash.technosolution.site/api';
+  String baseUrl = 'http://192.168.56.56/api';
+  // String baseUrl = 'https://itrash.technosolution.site/api';
 
-  Future<User> register({
+  // register auth api
+  Future<String> register({
     String? name,
     String? email,
     String? phone,
     String? password,
+    String? alamat,
   }) async {
-    var url = '$baseUrl/register';
+    var url = '$baseUrl/auth/register';
     var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({
       'name': name,
       'email': email,
-      'phone': phone,
+      'handphone': phone,
       'password': password,
+      'alamat': alamat,
     });
 
     var response =
         await http.post(Uri.parse(url), headers: headers, body: body);
 
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body)['data'];
-      User user = User.fromJson(data['user']);
-      user.token = 'Bearer ' + data['access_token'];
+      var data = jsonDecode(response.body)['message'];
 
-      return user;
+      return data;
     } else {
       throw Exception('gagal registrasi');
     }
@@ -61,6 +63,23 @@ class AuthServices {
       return user;
     } else {
       throw Exception('gagal login');
+    }
+  }
+
+  Future<String> logout(String token) async {
+    var url = '$baseUrl/auth/logout';
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    };
+
+    var responses = await http.post(Uri.parse(url), headers: headers);
+
+    if (responses.statusCode == 200) {
+      var data = jsonDecode(responses.body)['message'];
+      return data;
+    } else {
+      throw Exception("gagal logout");
     }
   }
 }
