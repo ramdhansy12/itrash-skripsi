@@ -5,9 +5,15 @@ import 'package:provider/provider.dart';
 
 import '../../theme.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
@@ -15,6 +21,48 @@ class ProfilePage extends StatelessWidget {
 
     String? userName = user.name!;
     String? email = user.email!;
+    String? phone = user.phone;
+    String? address = user.address;
+    String token = user.token!;
+
+    handleSignOut() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.submitLogout(token)) {
+        // ignore: use_build_context_synchronously
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/sign-in', (route) => false);
+      } else {
+        setState(() {
+          isLoading = true;
+
+          AlertDialog alert = AlertDialog(
+            title: const Text("Error"),
+            content: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: const Text("Terjadi gangguan, silahkan coba kembali"),
+            ),
+            actions: [
+              TextButton(
+                style: TextButton.styleFrom(backgroundColor: primaryColor),
+                child: Text(
+                  'Ok',
+                  style: primaryTextStyleWht,
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          );
+
+          showDialog(context: context, builder: (context) => alert);
+        });
+      }
+    }
 
     Widget header() {
       return AppBar(
@@ -53,8 +101,7 @@ class ProfilePage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/sign-in', (route) => false);
+                  handleSignOut();
                 },
                 child: Image.asset(
                   'asset/button_exit.png',
@@ -126,7 +173,23 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       Text('Email: ${email}'),
                     ],
-                  )
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text('Handphone: ${phone}'),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text('Alamat: ${address}'),
+                    ],
+                  ),
                 ],
               ),
               const SizedBox(
@@ -141,7 +204,7 @@ class ProfilePage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/termof-service');
+                  handleSignOut();
                 },
                 child: menuItem(
                   'Term Of Service',

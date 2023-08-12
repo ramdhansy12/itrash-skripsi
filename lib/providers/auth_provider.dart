@@ -16,18 +16,20 @@ class AuthProvider with ChangeNotifier {
     required String email,
     required String phone,
     required String password,
+    required String alamat,
   }) async {
     try {
-      User user = await AuthServices().register(
+      await AuthServices().register(
         name: name,
         email: email,
         phone: phone,
         password: password,
+        alamat: alamat,
       );
-      _user = user;
+
       return true;
     } catch (e) {
-      print(e);
+      // print(e);
       return false;
     }
   }
@@ -43,6 +45,16 @@ class AuthProvider with ChangeNotifier {
         password: password,
       );
       _user = user;
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> submitLogout(String token) async {
+    try {
+      await AuthServices().logout(token);
       return true;
     } catch (e) {
       return false;

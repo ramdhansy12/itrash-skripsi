@@ -19,6 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController phoneController = TextEditingController(text: '');
 
   TextEditingController passwordController = TextEditingController(text: '');
+  TextEditingController alamatController = TextEditingController(text: '');
 
   bool isLoading = false;
 
@@ -35,21 +36,16 @@ class _SignUpPageState extends State<SignUpPage> {
         email: emailController.text,
         phone: phoneController.text,
         password: passwordController.text,
+        alamat: alamatController.text,
       )) {
-        Navigator.pushNamed(context, '/home');
-      } else {
-        setState(() {
-          isLoading = false;
-        });
-
         AlertDialog alert = AlertDialog(
-          title: Text("Registrasi Gagal"),
+          title: const Text("Registrasi Berhasil"),
           content: Container(
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
             ),
-            child: Text("Maaf, Silahkan Coba Kembali"),
+            child: const Text("Silahkan Login akun"),
           ),
           actions: [
             TextButton(
@@ -58,12 +54,41 @@ class _SignUpPageState extends State<SignUpPage> {
                 'Ok',
                 style: primaryTextStyleWht,
               ),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/sign-in', (route) => false);
+              },
             ),
           ],
         );
 
         showDialog(context: context, builder: (context) => alert);
+      } else {
+        setState(() {
+          isLoading = false;
+          AlertDialog alert = AlertDialog(
+            title: const Text("Registrasi Gagal"),
+            content: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: const Text("Maaf, Silahkan Coba Kembali"),
+            ),
+            actions: [
+              TextButton(
+                style: TextButton.styleFrom(backgroundColor: primaryColor),
+                child: Text(
+                  'Ok',
+                  style: primaryTextStyleWht,
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          );
+
+          showDialog(context: context, builder: (context) => alert);
+        });
       }
 
       setState(() {
@@ -90,7 +115,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget header() {
       return Container(
-        margin: const EdgeInsets.only(top: 30),
+        margin: const EdgeInsets.only(top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -107,13 +132,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 color: const Color.fromARGB(255, 251, 249, 249),
               ),
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              'Daftar dan Jadikan Sampah Menjadi Uang',
-              style: subtitleTextStyle,
-            ),
           ],
         ),
       );
@@ -121,7 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget nameInput() {
       return Container(
-        margin: const EdgeInsets.only(top: 40),
+        margin: const EdgeInsets.only(top: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -133,7 +151,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 5,
             ),
             Container(
               height: 50,
@@ -226,7 +244,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget emailInput() {
       return Container(
-        margin: const EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -238,7 +256,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 5,
             ),
             Container(
               height: 50,
@@ -279,7 +297,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget phoneInput() {
       return Container(
-        margin: const EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.only(top: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -291,7 +309,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 5,
             ),
             Container(
               height: 50,
@@ -330,7 +348,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget passwordInput() {
       return Container(
-        margin: const EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -342,7 +360,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 5,
             ),
             Container(
               height: 50,
@@ -368,6 +386,55 @@ class _SignUpPageState extends State<SignUpPage> {
                         controller: passwordController,
                         decoration: const InputDecoration.collapsed(
                           hintText: 'Password Kamu',
+                          hintStyle: TextStyle(color: Colors.black38),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+    }
+
+    Widget passwordInput2() {
+      return Container(
+        margin: const EdgeInsets.only(top: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Alamat',
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              height: 50,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              decoration: BoxDecoration(
+                color: backgroundColor2,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: TextFormField(
+                        controller: alamatController,
+                        decoration: const InputDecoration.collapsed(
+                          hintText: 'Alamat Kamu',
                           hintStyle: TextStyle(color: Colors.black38),
                         ),
                       ),
@@ -452,6 +519,7 @@ class _SignUpPageState extends State<SignUpPage> {
               emailInput(),
               phoneInput(),
               passwordInput(),
+              passwordInput2(),
               isLoading ? LoadingButton() : signUpButton(),
               const Spacer(),
               footer(),
