@@ -1,11 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:itrash_skripsi/providers/auth_provider.dart';
 import 'package:itrash_skripsi/theme.dart';
+import 'package:itrash_skripsi/widgets/loading_button.dart';
+import 'package:provider/provider.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
   @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController nameController = TextEditingController(text: '');
+
+  TextEditingController emailController = TextEditingController(text: '');
+
+  TextEditingController phoneController = TextEditingController(text: '');
+
+  TextEditingController passwordController = TextEditingController(text: '');
+  TextEditingController alamatController = TextEditingController(text: '');
+
+  bool isLoading = false;
+
+  @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignUp() async {
+      setState(() {
+        isLoading = true;
+      });
+      if (await authProvider.register(
+        name: nameController.text,
+        email: emailController.text,
+        phone: phoneController.text,
+        password: passwordController.text,
+        alamat: alamatController.text,
+      )) {
+        AlertDialog alert = AlertDialog(
+          title: const Text("Registrasi Berhasil"),
+          content: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: const Text("Silahkan Login akun"),
+          ),
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(backgroundColor: primaryColor),
+              child: Text(
+                'Ok',
+                style: primaryTextStyleWht,
+              ),
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/sign-in', (route) => false);
+              },
+            ),
+          ],
+        );
+
+        showDialog(context: context, builder: (context) => alert);
+      } else {
+        setState(() {
+          isLoading = false;
+          AlertDialog alert = AlertDialog(
+            title: const Text("Registrasi Gagal"),
+            content: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: const Text("Maaf, Silahkan Coba Kembali"),
+            ),
+            actions: [
+              TextButton(
+                style: TextButton.styleFrom(backgroundColor: primaryColor),
+                child: Text(
+                  'Ok',
+                  style: primaryTextStyleWht,
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          );
+
+          showDialog(context: context, builder: (context) => alert);
+        });
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
     Widget imageHeader() {
       return Container(
         margin: const EdgeInsets.only(top: 30),
@@ -25,7 +115,7 @@ class SignUpPage extends StatelessWidget {
 
     Widget header() {
       return Container(
-        margin: const EdgeInsets.only(top: 30),
+        margin: const EdgeInsets.only(top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,13 +132,6 @@ class SignUpPage extends StatelessWidget {
                 color: const Color.fromARGB(255, 251, 249, 249),
               ),
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              'Daftar dan Jadikan Sampah Menjadi Uang',
-              style: subtitleTextStyle,
-            ),
           ],
         ),
       );
@@ -56,7 +139,7 @@ class SignUpPage extends StatelessWidget {
 
     Widget nameInput() {
       return Container(
-        margin: const EdgeInsets.only(top: 40),
+        margin: const EdgeInsets.only(top: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -68,7 +151,7 @@ class SignUpPage extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 5,
             ),
             Container(
               height: 50,
@@ -91,7 +174,8 @@ class SignUpPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        controller: nameController,
+                        decoration: const InputDecoration.collapsed(
                           hintText: 'Nama Lengkap Kamu',
                           hintStyle: TextStyle(color: Colors.black38),
                         ),
@@ -160,7 +244,7 @@ class SignUpPage extends StatelessWidget {
 
     Widget emailInput() {
       return Container(
-        margin: const EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -172,7 +256,7 @@ class SignUpPage extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 5,
             ),
             Container(
               height: 50,
@@ -195,7 +279,8 @@ class SignUpPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: TextFormField(
-                        decoration: const InputDecoration(
+                        controller: emailController,
+                        decoration: const InputDecoration.collapsed(
                           hintText: 'Email Kamu',
                           hintStyle: TextStyle(color: Colors.black38),
                         ),
@@ -210,9 +295,60 @@ class SignUpPage extends StatelessWidget {
       );
     }
 
+    Widget phoneInput() {
+      return Container(
+        margin: const EdgeInsets.only(top: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Nomer Handphone',
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              height: 50,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              decoration: BoxDecoration(
+                color: backgroundColor2,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'asset/icon_phone.png',
+                      width: 17,
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: TextFormField(
+                        controller: phoneController,
+                        decoration: const InputDecoration.collapsed(
+                            hintText: '(with code area ex: 628...)'),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     Widget passwordInput() {
       return Container(
-        margin: const EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -224,7 +360,7 @@ class SignUpPage extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 5,
             ),
             Container(
               height: 50,
@@ -247,8 +383,58 @@ class SignUpPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: TextFormField(
+                        controller: passwordController,
                         decoration: const InputDecoration.collapsed(
                           hintText: 'Password Kamu',
+                          hintStyle: TextStyle(color: Colors.black38),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+    }
+
+    Widget passwordInput2() {
+      return Container(
+        margin: const EdgeInsets.only(top: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Alamat',
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              height: 50,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              decoration: BoxDecoration(
+                color: backgroundColor2,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: TextFormField(
+                        controller: alamatController,
+                        decoration: const InputDecoration.collapsed(
+                          hintText: 'Alamat Kamu',
                           hintStyle: TextStyle(color: Colors.black38),
                         ),
                       ),
@@ -268,9 +454,7 @@ class SignUpPage extends StatelessWidget {
         margin: const EdgeInsets.only(top: 30),
         width: double.infinity,
         child: TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/sign-in');
-          },
+          onPressed: handleSignUp,
           style: TextButton.styleFrom(
             backgroundColor: bgButton2,
             shape: RoundedRectangleBorder(
@@ -333,8 +517,10 @@ class SignUpPage extends StatelessWidget {
               nameInput(),
               // usernameInput(),
               emailInput(),
+              phoneInput(),
               passwordInput(),
-              signUpButton(),
+              passwordInput2(),
+              isLoading ? LoadingButton() : signUpButton(),
               const Spacer(),
               footer(),
             ],

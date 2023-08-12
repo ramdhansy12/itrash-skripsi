@@ -1,6 +1,6 @@
-part of 'model.dart';
+part of 'models.dart';
 
-class User {
+class UserModel {
   int? id;
   String? name;
   String? email;
@@ -10,7 +10,7 @@ class User {
   String? token;
   String? address;
 
-  User({
+  UserModel({
     this.id,
     this.name,
     this.email,
@@ -21,9 +21,8 @@ class User {
     this.token,
   });
 
-  User.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     // print('from json: $json');
-
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -33,22 +32,4 @@ class User {
     roles = json['roles'];
     token = json['token'];
   }
-
-  // Map<String, dynamic> toJson() {
-  //   return {
-  //     'id': id,
-  //     'name': name,
-  //     'email': email,
-  //     'password': password,
-  //     'roles': roles,
-  //     'token': token,
-  //   };
-  // }
 }
-
-// User mockUser = User(
-//   id: 1,
-//   name: 'Raka Noviyanto',
-//   email: 'raka@gmail.com',
-//   phone: '62877959596',
-// );
