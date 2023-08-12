@@ -4,8 +4,8 @@ import 'package:itrash_skripsi/model/model.dart';
 import 'package:http/http.dart' as http;
 
 class TransaksiService {
-  String baseUrl = 'http://192.168.56.56/api';
-  // String baseUrl = 'https://itrash.technosolution.site/api';
+  // String baseUrl = 'http://192.168.56.56/api';
+  String baseUrl = 'https://itrash.technosolution.site/api';
 
   Future<List<TransaksiModel>> getTransaksi(String token) async {
     var url = '$baseUrl/transaksi';

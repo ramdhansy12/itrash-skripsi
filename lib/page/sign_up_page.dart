@@ -98,7 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget imageHeader() {
       return Container(
-        margin: const EdgeInsets.only(top: 30),
+        margin: const EdgeInsets.only(top: 10),
         child: const Center(
           child: Column(
             children: [
@@ -115,10 +115,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget header() {
       return Container(
-        margin: const EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.only(top: 10, bottom: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            imageHeader(),
             // const Image(
             //   image: AssetImage('asset/logo.png'),
             //   height: 40,
@@ -127,8 +128,8 @@ class _SignUpPageState extends State<SignUpPage> {
             Text(
               'Sign Up',
               style: primaryTextStyle.copyWith(
-                fontSize: 30,
-                fontWeight: semiBold,
+                fontSize: 24,
+                fontWeight: bold,
                 color: const Color.fromARGB(255, 251, 249, 249),
               ),
             ),
@@ -147,7 +148,8 @@ class _SignUpPageState extends State<SignUpPage> {
               'Nama Lengkap',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
-                fontWeight: medium,
+                fontWeight: semiBold,
+                color: Colors.lightGreen,
               ),
             ),
             const SizedBox(
@@ -252,7 +254,8 @@ class _SignUpPageState extends State<SignUpPage> {
               'Email Address',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
-                fontWeight: medium,
+                fontWeight: semiBold,
+                color: Colors.lightGreen,
               ),
             ),
             const SizedBox(
@@ -305,7 +308,8 @@ class _SignUpPageState extends State<SignUpPage> {
               'Nomer Handphone',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
-                fontWeight: medium,
+                fontWeight: semiBold,
+                color: Colors.lightGreen,
               ),
             ),
             const SizedBox(
@@ -356,7 +360,8 @@ class _SignUpPageState extends State<SignUpPage> {
               'Password',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
-                fontWeight: medium,
+                fontWeight: semiBold,
+                color: Colors.lightGreen,
               ),
             ),
             const SizedBox(
@@ -384,6 +389,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Expanded(
                       child: TextFormField(
                         controller: passwordController,
+                        obscureText: true,
                         decoration: const InputDecoration.collapsed(
                           hintText: 'Password Kamu',
                           hintStyle: TextStyle(color: Colors.black38),
@@ -401,7 +407,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget passwordInput2() {
       return Container(
-        margin: const EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -409,7 +415,8 @@ class _SignUpPageState extends State<SignUpPage> {
               'Alamat',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
-                fontWeight: medium,
+                fontWeight: semiBold,
+                color: Colors.lightGreen,
               ),
             ),
             const SizedBox(
@@ -456,7 +463,7 @@ class _SignUpPageState extends State<SignUpPage> {
         child: TextButton(
           onPressed: handleSignUp,
           style: TextButton.styleFrom(
-            backgroundColor: bgButton2,
+            backgroundColor: const Color.fromARGB(255, 5, 161, 31),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -464,9 +471,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Text(
             'Register',
             style: blackTextStyle.copyWith(
-              fontSize: 16,
-              fontWeight: medium,
-            ),
+                fontSize: 16, fontWeight: medium, color: Colors.white),
           ),
         ),
       );
@@ -474,7 +479,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget footer() {
       return Container(
-        margin: const EdgeInsets.only(bottom: 30),
+        margin: const EdgeInsets.only(bottom: 30, top: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -484,6 +489,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 fontSize: 12,
               ),
             ),
+            const SizedBox(
+              width: 5,
+            ),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, '/sign-in');
@@ -491,9 +499,9 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Text(
                 'Sign In',
                 style: primaryTextStyle2.copyWith(
-                  fontSize: 12,
-                  fontWeight: medium,
-                ),
+                    fontSize: 12,
+                    fontWeight: medium,
+                    color: Colors.greenAccent),
               ),
             )
           ],
@@ -503,27 +511,28 @@ class _SignUpPageState extends State<SignUpPage> {
 
     return Scaffold(
       backgroundColor: backgroundColor3,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.symmetric(
             horizontal: defaultMargin,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              imageHeader(),
-              header(),
-              nameInput(),
-              // usernameInput(),
-              emailInput(),
-              phoneInput(),
-              passwordInput(),
-              passwordInput2(),
-              isLoading ? LoadingButton() : signUpButton(),
-              const Spacer(),
-              footer(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // imageHeader(),
+                header(),
+                nameInput(),
+                // usernameInput(),
+                emailInput(),
+                phoneInput(),
+                passwordInput(),
+                passwordInput2(),
+                isLoading ? const LoadingButton() : signUpButton(),
+                footer(),
+              ],
+            ),
           ),
         ),
       ),
